@@ -37,8 +37,7 @@ jobs:
           pip install markdown pyyaml pygments
           mkdir -p _site
           python build_index.py _site
-          for row in $(jq -c '.[]' skills.json); do
-            name=$(jq -r .name <<<"$row"); repo=$(jq -r .repo <<<"$row"); build=$(jq -r .build <<<"$row")
+          jq -r '.[] | [.name, .repo, .build] | @tsv' skills.json | while IFS=$'\t' read -r name repo build; do
             git clone --depth 1 "https://github.com/$repo" "src/$name"
             if [ -f "src/$name/skills/$name/requirements.txt" ]; then
               pip install -r "src/$name/skills/$name/requirements.txt" --quiet
