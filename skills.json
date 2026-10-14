@@ -4,9 +4,17 @@
     "title": "Course Studio",
     "repo": "akshaypjoshi/course-studio",
     "build": "site/build.py",
-    "summary": "Plan and write technical courses, chapters, notes and cheat sheets, with every diagram built as an interactive isometric figure.",
-    "tags": ["courses", "notes", "isometric figures", "Claude Code plugin"],
+    "summary": "Plan and write courses, chapters, notes and cheat sheets on any subject, from algorithms to rocket engines, with every diagram built as an interactive isometric figure.",
+    "tags": [
+      "courses",
+      "any subject",
+      "isometric figures",
+      "Claude Code plugin"
+    ],
     "glyph": "CS",
-    "accent": "#D04A28", "tint": "#F4E1D8", "accentDark": "#F06A45", "tintDark": "#3A2219"
+    "accent": "#D04A28",
+    "tint": "#F4E1D8",
+    "accentDark": "#F06A45",
+    "tintDark": "#3A2219"
   }
 ]
