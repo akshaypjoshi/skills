@@ -1,0 +1,61 @@
+name: Publish skills.akshayjoshi.dev
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  repository_dispatch:
+    types: [skill-updated]
+  schedule:
+    - cron: "17 3 * * *"   # daily, so skill sites pick up their latest main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build the hub and every skill site
+        run: |
+          pip install markdown pyyaml pygments
+          mkdir -p _site
+          python build_index.py _site
+          for row in $(jq -c '.[]' skills.json); do
+            name=$(jq -r .name <<<"$row"); repo=$(jq -r .repo <<<"$row"); build=$(jq -r .build <<<"$row")
+            git clone --depth 1 "https://github.com/$repo" "src/$name"
+            if [ -f "src/$name/skills/$name/requirements.txt" ]; then
+              pip install -r "src/$name/skills/$name/requirements.txt" --quiet
+            fi
+            python "src/$name/$build" "_site/$name"
+          done
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
