@@ -16,5 +16,23 @@
     "tint": "#F4E1D8",
     "accentDark": "#F06A45",
     "tintDark": "#3A2219"
+  },
+  {
+    "name": "course-lab",
+    "title": "Course Lab",
+    "repo": "akshaypjoshi/course-lab",
+    "build": "site/build.py",
+    "summary": "Courses that test the learner: every chapter ends with a 10-question quiz that grades itself in the page, and Claude turns the results into a diagnosis and a targeted retest.",
+    "tags": [
+      "quizzes",
+      "assessment",
+      "built on Course Studio",
+      "Claude Code plugin"
+    ],
+    "glyph": "CL",
+    "accent": "#2F7D5B",
+    "tint": "#DCEBE2",
+    "accentDark": "#4CC38A",
+    "tintDark": "#1A2E24"
   }
 ]

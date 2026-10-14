@@ -6,6 +6,7 @@ Source for [skills.akshayjoshi.dev](https://skills.akshayjoshi.dev): an index of
 |---|---|
 | `/` | `build_index.py` + `skills.json` (this repo) |
 | `/course-studio/` | [akshaypjoshi/course-studio](https://github.com/akshaypjoshi/course-studio) `site/build.py` |
+| `/course-lab/` | [akshaypjoshi/course-lab](https://github.com/akshaypjoshi/course-lab) `site/build.py` |
 
 ## How it publishes
 
